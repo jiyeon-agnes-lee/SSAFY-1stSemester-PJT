@@ -2,59 +2,134 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html class="h-100">
+
 <head>
-<style type="text/css">
-	table {
-		width: 100%; 
-		border: 1px solid black;
-		border-collapse: collapse;
-	}
-	thead {
-		text-align : center;
-	}
-	th, tr, td {
-		border: 1px solid black;
-		padding: 10px;
-	}
-</style>
 <meta charset="UTF-8">
-<title>리뷰 목록 조회</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SSAFIT</title>
+<style>
+.list_corp {
+	display: flex;
+	flex-direction: row;
+}
+
+.corp_item {
+	color: darkgray;
+	margin-left: auto;
+}
+
+.corp_item>a {
+	color: darkgray;
+	text-decoration-line: none;
+}
+
+img {
+	display: block;
+	margin: 0px auto;
+}
+
+.pagination {
+	justify-content: center;
+}
+
+</style>
+<!-- CSS only -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
 </head>
-<body>
-	<h1>리뷰 목록 조회</h1>
-	<c:if test="${!empty list }">
-		<h2>지금까지 등록된 리뷰 수 : ${list.size() }</h2>
-	</c:if>
-	<table>
-		<thead>
-			<tr>
-				<th>영상번호</th>
-				<th>번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>조회수</th>
-				<th>작성일</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${list }" var="item">
-				<tr>
-					<td>${item.videoNo }</td>
-					<td>${item.reviewNo }</td>
-					<td>${item.title}</td>
-					<td>${item.userName }</td>
-					<td>${item.viewCnt }</td>
-					<td>${item.date}</td>
-				</tr>
-			</c:forEach>
 
-			<c:if test="${empty list }">
-				<c:out value="입력된 리뷰가 없습니다."></c:out>
-			</c:if>
+<body class="d-flex flex-column h-100">
+	<!-- header -->
+	<%@ include file="/common/header.jsp"%>
 
-		</tbody>
-	</table>
-	<a href="./video/reviewRegist.jsp">추가등록</a>
+	<!-- main 시작-->
+	<main>
+		<div class="container">
+			<br>
+			<!-- 제목 시작-->
+			<p class="display-5 fw-bold" style="text-align: center">운동 영상
+				상세보기</p>
+			<!-- 제목 끝-->
+			<hr>
+
+			<!-- 썸네일 시작-->
+			<!-- 비디오 정보 가져오기 구현 필요-->
+			<div class="m-auto" style="width: 300px;">
+				<iframe src="https://www.youtube.com/embed/gMaB-fG4u4g"
+					title="YouTube video player"></iframe>
+			</div>
+
+			<hr>
+			<!-- 썸네일 끝-->
+
+			<!-- 검색창과 글작성 시작-->
+			<div class="d-flex justify-content-end">
+				<form>
+					<input class="form-control" type="text" placeholder="Search"
+						aria-label="Search">
+				</form>
+				<button class="btn btn-outline-dark d-inline" type="button">
+					검색</button>
+				<button class="btn btn-outline-info d-inline" type="button" onClick="location.href='./video/reviewRegist.jsp'">
+					글작성</button>
+			</div>
+			<!-- 검색창과 글작성 끝-->
+			<br>
+			<!-- 리뷰 목록 시작-->
+			<div>
+				<c:if test="${empty list }">
+					<c:out value="입력된 리뷰가 없습니다."></c:out>
+				</c:if>
+				<c:if test="${!empty list }">
+					<table class="table">
+						<colgroup>
+							<col width="10%">
+							<col width="auto">
+							<col width="12%">
+							<col width="13%">
+							<col width="15%">
+						</colgroup>
+						<thead>
+							<tr>
+								<th scope="col">번호</th>
+								<th scope="col">제목</th>
+								<th scope="col">작성자</th>
+								<th scope="col">조회수</th>
+								<th scope="col">작성일</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${list }" var="item">
+								<tr>
+									<th scope="row">${item.reviewNo }</th>
+									<td>${item.title}</td>
+									<td>${item.userName }</td>
+									<td>${item.viewCnt }</td>
+									<td>${item.date}</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+					<c:out value="total: ${list.size() }"></c:out>
+				</c:if>
+			</div>
+			<!-- 리뷰 목록 끝-->
+		</div>
+	</main>
+	<!-- main 끝-->
+
+	<!-- footer -->
+	<%@ include file="/common/footer.jsp"%>
+
+
+	<!-- JavaScript Bundle with Popper -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
+<!-- End -->
