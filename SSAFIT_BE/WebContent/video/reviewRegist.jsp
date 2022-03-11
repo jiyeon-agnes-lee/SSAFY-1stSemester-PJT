@@ -19,11 +19,15 @@
 		<fieldset>
 			<legend> 리뷰 입력 </legend>
 			<input type="hidden" name="action" value="reviewRegist"> 
+			<span><label for="videoNo">영상 번호</label> </span>
+			<input type="number" id="videoNo" name="videoNo">
+			<br> 
 			<span><label for="title">제목</label> </span>
 			<input type="text" id="title" name="title">
 			<br> 
 			<span><label for="content">내용</label></span>
 			<textarea id="content" name="content" rows="3"></textarea>
+			
 			<input type="hidden" id="userName" name="userName" value="ssafit">
 			<input type="submit" value="등록">
 			<input type="reset">
