@@ -29,6 +29,7 @@
 	<table>
 		<thead>
 			<tr>
+				<th>영상번호</th>
 				<th>번호</th>
 				<th>제목</th>
 				<th>작성자</th>
@@ -39,7 +40,8 @@
 		<tbody>
 			<c:forEach items="${list }" var="item">
 				<tr>
-					<td>${item.no }</td>
+					<td>${item.videoNo }</td>
+					<td>${item.reviewNo }</td>
 					<td>${item.title}</td>
 					<td>${item.userName }</td>
 					<td>${item.viewCnt }</td>
