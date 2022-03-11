@@ -47,7 +47,7 @@ public class ReviewDao {
 		review.setDate(LocalDate.now());
 		list.add(review);
 	}
-
+    // 고유번호를 사용해서 내가 전체리스트의 어디 index에 있는가를 찾아낸다.
 	public int getIdx(int no) {
 		for(int i=0; i< list.size(); i++) {
 			Review r = list.get(i);
