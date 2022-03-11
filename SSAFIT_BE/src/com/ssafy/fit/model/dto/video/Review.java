@@ -5,6 +5,10 @@ import java.time.LocalDate;
 public class Review {
 	// 고유 번호
 	private int no;
+	// 비디오 번호
+	private int videoNo;
+	// 비디오에 따른 리뷰 번호
+	private int reviewNo;
 	// 리뷰 제목
 	private String title;
 	// 리뷰 내용
@@ -20,7 +24,8 @@ public class Review {
 		
 	}
 
-	public Review(String title, String content, String userName) {
+	public Review(int videoNo, String title, String content, String userName) {
+		this.videoNo = videoNo;
 		this.title = title;
 		this.content = content;
 		this.userName = userName;
@@ -33,7 +38,23 @@ public class Review {
 	public void setNo(int no) {
 		this.no = no;
 	}
+	
+	public int getVideoNo() {
+		return videoNo;
+	}
 
+	public void setVideoNo(int videoNo) {
+		this.videoNo = videoNo;
+	}
+	
+	public int getReviewNo() {
+		return reviewNo;
+	}
+
+	public void setReviewNo(int reviewNo) {
+		this.reviewNo = reviewNo;
+	}
+	
 	public String getTitle() {
 		return title;
 	}
@@ -76,7 +97,7 @@ public class Review {
 
 	@Override
 	public String toString() {
-		return "Review [no=" + no + ", title=" + title + ", content=" + content + ", userName=" + userName
+		return "Review [no=" + no + ", videoNo=" + videoNo + ", reviewNo=" + reviewNo + ", title=" + title + ", content=" + content + ", userName=" + userName
 				+ ", viewCnt=" + viewCnt + ", date=" + date + "]";
 	}	
 	
