@@ -9,7 +9,7 @@ import com.ssafy.fit.model.dto.video.Review;
 
 public class ReviewDao {
 	private List<Review> list = new ArrayList<>();
-	private static int no = 0;
+	private int no = 0;
 	private static ReviewDao instance;
 	
 	private ReviewDao() {
@@ -21,9 +21,7 @@ public class ReviewDao {
 			instance = new ReviewDao();
 		return instance;
 	}
-	public static int getViewCnt() {
-		return no;
-	}
+	
 	// 전체 리뷰 목록 가져오기
 	public List<Review> getReviewList() {
 		return list;
