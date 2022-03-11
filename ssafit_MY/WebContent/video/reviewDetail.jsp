@@ -89,7 +89,7 @@ body {
 			</thead>
 			<tbody>
 				<tr>
-					<th scope="row">${review.no }</th>
+					<th scope="row">${review.no}</th>
 					<td>${review.title}</td>
 					<td>${review.userName}</td>
 					<td>${review.viewCnt}</td>
@@ -103,11 +103,11 @@ body {
 				name="content" rows="3"> ${review.content}</textarea>
 		</div>
 		<!-- 목록 버튼 -->
-		<a class="btn btn-primary float-end" href="/ssafit/main?action=reviewList"
+		<a class="btn btn-primary float-end" href="/ssafit/main?action=reviewRewriteCancel&videoNo=${review.videoNo}"
 			role="button">목록</a>
 		<!-- 리뷰 수정 -->
 		<a class="btn btn-info float-end"
-			href="/ssafit/main?action=reviewModify&no=${review.no }"
+			href="/ssafit/main?action=reviewModify&no=${review.no}"
 			role="button">리뷰 수정</a>
 		<!-- 입력 버튼 -->
 		<a class="btn btn-secondary " href="#" role="button">이전 글</a>
