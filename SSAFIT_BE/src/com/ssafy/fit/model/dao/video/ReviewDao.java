@@ -30,7 +30,7 @@ public class ReviewDao {
 	}
 
 	// 파라미터로 전송한 리뷰객체를 리스트에 추가하기
-	public void addUser(Review review) {
+	public void addReview(Review review) {
 		review.setNo(++no);
 		review.setDate(LocalDate.now());
 		list.add(review);
