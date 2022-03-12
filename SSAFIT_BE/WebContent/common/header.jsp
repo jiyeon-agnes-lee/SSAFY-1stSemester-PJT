@@ -43,7 +43,7 @@
 			<div class="navbar-collapse collapse" id="navbarsExample01">
 				<ul class="navbar-nav me-auto mb-2">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">Home</a></li>
+						aria-current="page" href="http://localhost:8080/ssafit/main.jsp">Home</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="dropdown01"
 						data-bs-toggle="dropdown" aria-expanded="false">회원 정보</a>
