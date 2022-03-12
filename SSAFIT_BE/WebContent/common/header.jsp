@@ -5,25 +5,40 @@
 	<nav class="navbar navbar-dark bg-dark"
 		aria-label="First navbar example">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">SSAFIT</a>
-			
-			<c:if test="${empty loginUser }">
-				<input class="btn btn-primary" type="button"
-					onClick="location.href='http://localhost:8080/ssafit/user/userLogin.jsp'"
-					value="로그인">
-			</c:if>
-			<c:if test="${!empty loginUser }">
-				<p style="color:white;">${loginUser.name }님 반갑습니다.</p>
-				<input class="btn btn-secondary" type="button"
-					onClick="location.href='http://localhost:8080/ssafit/main?action=logout'"
-					value="로그아웃">
-			</c:if>
-			<button class="navbar-toggler collapsed" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarsExample01"
-				aria-controls="navbarsExample01" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+			<a class="navbar-brand" href="#">SSAFIT</a>s
+			<div class="row-vh d-flex">
+				<c:if test="${!empty loginUser }">
+					<div class="item row-vh d-flex">
+						<div class="item" style="margin-right: 15px;">
+
+							<p style="margin-top: 8px; margin-bottom: 0; color: white;">${loginUser.name }
+								님 반갑습니다!</p>
+						</div>
+						<div class="item" style="margin-right: 15px;">
+							<input class="btn btn-secondary" type="button"
+								onClick="location.href='http://localhost:8080/ssafit/main?action=logout'"
+								value="로그아웃">
+						</div>
+					</div>
+				</c:if>
+
+				<c:if test="${empty loginUser }">
+					<div class="item" style="margin-right: 15px;">
+						<input class="btn btn-primary" type="button"
+							onClick="location.href='http://localhost:8080/ssafit/user/userLogin.jsp'"
+							value="로그인">
+					</div>
+				</c:if>
+				<div class="item">
+					<button class="navbar-toggler collapsed" type="button"
+						data-bs-toggle="collapse" data-bs-target="#navbarsExample01"
+						aria-controls="navbarsExample01" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+				</div>
+			</div>
+
 
 			<div class="navbar-collapse collapse" id="navbarsExample01">
 				<ul class="navbar-nav me-auto mb-2">
@@ -49,7 +64,6 @@
 						</ul></li>
 					<li class="nav-item"><a class="nav-link" href="#">가까운 체육관</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="#">로그아웃</a></li>
 				</ul>
 				<form>
 					<input class="form-control" type="text" placeholder="Search"
