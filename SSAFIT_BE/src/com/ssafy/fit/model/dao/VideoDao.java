@@ -1,9 +1,10 @@
-package com.ssafy.fit.model;
+package com.ssafy.fit.model.dao.video;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ssafy.fit.dto.Video;
+import com.ssafy.fit.model.dto.video.Video;
+
 
 public class VideoDao {
 	private List<Video> list = new ArrayList<>();
@@ -45,6 +46,7 @@ public class VideoDao {
 
 	// 파라미터로 넘어온 보드 리스트에 등록하기
 	public void insertVideo(Video v) {
+		v.setNo(++no);
 		// TODO Auto-generated method stub
 		list.add(v);
 	}
