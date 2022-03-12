@@ -23,12 +23,7 @@
 	color: darkgray;
 	text-decoration-line: none;
 }
-.welcome-msg {
 
-}
-.btn-move {
-	display : inline-block;
-}
 </style>
 <!-- CSS only -->
 <link
@@ -41,16 +36,21 @@
 	<%@ include file="/common/header.jsp"%>
 
 	<main class="flex-shrink-0">
-		<div class="container welcome-msg">
-			<div>
+		<div class="container">
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
 			<p class="display-6 fw-bold" style="text-align: center; vertical-align:middle;">${name } 님의 회원가입을 축하합니다 !</p>
 			<br>
-			</div>
 			
 			<!-- 이동 버튼 -->
-			<div style="text-align">
-				<input class="btn btn-primary btn-move" type="button" value="로그인" onClick="location.href='./user/userRegist.jsp'"> 
-				<input class="btn btn-secondary btn-move" type="button" value="홈으로" onClick="location.href='./user/userRegist.jsp'">	
+			<div class="mb-3 text-center">
+				<input class="btn w-25 btn-primary btn-lg" type="button" value="로그인" onClick="location.href='./user/userLogin.jsp'"> 
+				<input class="btn w-25 btn-secondary btn-lg" type="button" value="홈으로" onClick="location.href='./index.jsp'">	
 			</div>
 			
 		</div>
