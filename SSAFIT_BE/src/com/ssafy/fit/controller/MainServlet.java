@@ -181,7 +181,9 @@ public class MainServlet extends HttpServlet {
 	
 	private void doMoveReviewRegist(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		int videoNo = Integer.parseInt(req.getParameter("videoNo"));
+		String videoId = req.getParameter("videoId");
 		req.setAttribute("videoNo", videoNo);
+		req.setAttribute("videoId", videoId);
 		RequestDispatcher rd = req.getRequestDispatcher("/video/reviewRegist.jsp");
 		rd.forward(req, resp);
 	}
@@ -193,7 +195,7 @@ public class MainServlet extends HttpServlet {
 		String userName = req.getParameter("userName");
 		String videoId = req.getParameter("videoId");
 		req.setAttribute("videoId", videoId);
-		int videoNo = Integer.parseInt(req.getParameter("videoNo"));
+		int videoNo = Integer.parseInt(req.getParameter("videoNo"));	
 		req.setAttribute("videoNo", videoNo);
 		// List에 추가
 		Review review = new Review(videoNo, title, content, userName);
@@ -221,6 +223,8 @@ public class MainServlet extends HttpServlet {
 		int no = Integer.parseInt(req.getParameter("no"));
 		// 해당 리뷰 객체를 얻어서 request에 탑승시킨다.
 		req.setAttribute("review", ReviewDao.getInstance().getReviewList().get(ReviewDao.getInstance().getIdx(no)));
+		String videoId = req.getParameter("videoId");
+		req.setAttribute("videoId", videoId);
 		RequestDispatcher rd = req.getRequestDispatcher("/video/reviewModify.jsp");
 		rd.forward(req, resp);
 	}
@@ -235,7 +239,8 @@ public class MainServlet extends HttpServlet {
 		theReview.setViewCnt(viewCntPlus);
 		// 해당 리뷰 객체를 얻어서 request에 탑승시킨다.
 		req.setAttribute("review", theReview);
-
+		String videoId = req.getParameter("videoId");
+		req.setAttribute("videoId", videoId);
 		RequestDispatcher rd = req.getRequestDispatcher("/video/reviewDetail.jsp");
 		rd.forward(req, resp);
 	}
@@ -249,8 +254,9 @@ public class MainServlet extends HttpServlet {
 		Review toReWrite = ReviewDao.getInstance().getReviewList().get(idx);
 		// 클릭한 리뷰가 무슨 비디오 소속인지
 		int videoNo = Integer.parseInt(req.getParameter("videoNo"));
-		System.out.println("출력됨 !!!! "+videoNo);
 		req.setAttribute("videoNo", videoNo);
+		String videoId = req.getParameter("videoId");
+		req.setAttribute("videoId", videoId);
 		// 해당 객체의 제목과 내용을 수정한다.
 		toReWrite.setTitle(req.getParameter("title"));
 		toReWrite.setContent(req.getParameter("content"));
@@ -272,6 +278,8 @@ public class MainServlet extends HttpServlet {
 		// 클릭한 리뷰 제거
 		ReviewDao.getInstance().getReviewList().remove(idx);
 		req.setAttribute("videoNo", videoNo);
+		String videoId = req.getParameter("videoId");
+		req.setAttribute("videoId", videoId);
 		// ReviewNo 재배열
 		// 클릭한 리뷰와 같은 비디오 소속인 리뷰들 중 클릭한 리뷰 이후의 리뷰들의 ReviewNo을 하나 줄인다.
 		for(int i=reviewNo; i <= ReviewDao.getInstance().getVideoReviewList(videoNo).size();i++) {
