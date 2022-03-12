@@ -55,7 +55,7 @@ public class VideoServlet extends HttpServlet {
 		case "list":
 			doListVideo(req, resp);
 			break;
-		case "partlist":
+		case "partList":
 			doFindPart(req, resp);
 			break;
 		}		
@@ -76,10 +76,15 @@ public class VideoServlet extends HttpServlet {
 		String part = req.getParameter("findpart");
 		VideoDao dao = VideoDao.getInstance();
 		List<Video> partlist = dao.findVideo(part);
-		req.setAttribute("partlist", part);
+		List<Video> list = dao.selectVideo();
+		//Home.jsp 에 실제 내 데이터를 실어서 전달 할래~~~
+		req.setAttribute("list", list);
+		System.out.println(part);
+		req.setAttribute("partlist", partlist);
 		RequestDispatcher rd = req.getRequestDispatcher("/Home.jsp");
-		rd.forward(req, resp);		
+		rd.forward(req, resp);
 		
 	}
 
 }
+
