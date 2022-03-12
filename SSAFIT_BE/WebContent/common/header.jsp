@@ -1,10 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <header>
 	<nav class="navbar navbar-dark bg-dark"
 		aria-label="First navbar example">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#">SSAFIT</a>
+			
+			<c:if test="${empty loginUser }">
+				<input class="btn btn-primary" type="button"
+					onClick="location.href='http://localhost:8080/ssafit/user/userLogin.jsp'"
+					value="로그인">
+			</c:if>
+			<c:if test="${!empty loginUser }">
+				<p style="color:white;">${loginUser.name }님 반갑습니다.</p>
+				<input class="btn btn-secondary" type="button"
+					onClick="location.href='http://localhost:8080/ssafit/main?action=logout'"
+					value="로그아웃">
+			</c:if>
 			<button class="navbar-toggler collapsed" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarsExample01"
 				aria-controls="navbarsExample01" aria-expanded="false"
