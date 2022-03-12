@@ -37,11 +37,11 @@
     		<!-- 폼에 필요한 입력값(자동 제공) -->
     		<input type="hidden" name="action" value="reviewRegist"> 
     		<!-- 로그인 구현 시 userName 은 로그인한 유저의 이름으로 변경 -->
-    		<input type="hidden" id="userName" name="userName" value="ssafit">
+    		<input type="hidden" id="userName" name="userName" value="${loginUser.name }">
 	        <div class="container">
 	        <br>
 	        <!-- 리뷰 입력 페이지 헤더 -->
-	        <p class="display-5 fw-bold" style="text-align: center"> 리뷰 쓰기</p>
+	        <p class="display-5 fw-bold" style="text-align: center">리뷰 쓰기</p>
 	        <hr>
 	  
 	        <!-- 입력 창 -->
