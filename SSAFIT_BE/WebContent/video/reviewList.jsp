@@ -33,7 +33,6 @@ img {
 .pagination {
 	justify-content: center;
 }
-
 </style>
 <!-- CSS only -->
 <link
@@ -51,8 +50,7 @@ img {
 		<div class="container">
 			<br>
 			<!-- 제목 시작-->
-			<p class="display-5 fw-bold" style="text-align: center">운동 영상
-				상세보기</p>
+			<p class="display-5 fw-bold" style="text-align: center">운동 영상 상세</p>
 			<!-- 제목 끝-->
 			<hr>
 
@@ -74,7 +72,8 @@ img {
 				</form>
 				<button class="btn btn-outline-dark d-inline" type="button">
 					검색</button>
-				<button class="btn btn-outline-info d-inline" type="button" onClick="location.href='http://localhost:8080/ssafit/video/reviewRegist.jsp'">
+				<button class="btn btn-outline-info d-inline" type="button"
+					onClick="location.href='http://localhost:8080/ssafit/video/reviewRegist.jsp'">
 					글작성</button>
 			</div>
 			<!-- 검색창과 글작성 끝-->
@@ -105,11 +104,17 @@ img {
 						<tbody>
 							<c:forEach items="${list }" var="item">
 								<tr>
-									<th scope="row">${item.reviewNo }</th>
-									<td>${item.title}</td>
-									<td>${item.userName }</td>
-									<td>${item.viewCnt }</td>
-									<td>${item.date}</td>
+									<th scope="row"><a
+										style="text-decoration: none; color: black"
+										href="/ssafit/main?action=reviewDetail&no=${item.no}">${item.reviewNo }</a></th>
+									<td><a style="text-decoration: none; color: black"
+										href="/ssafit/main?action=reviewDetail&no=${item.no}">${item.title}</a></td>
+									<td><a style="text-decoration: none; color: black"
+										href="/ssafit/main?action=reviewDetail&no=${item.no}">${item.userName }</a></td>
+									<td><a style="text-decoration: none; color: black"
+										href="/ssafit/main?action=reviewDetail&no=${item.no}">${item.viewCnt }</a></td>
+									<td><a style="text-decoration: none; color: black"
+										href="/ssafit/main?action=reviewDetail&no=${item.no}">${item.date}</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
