@@ -67,16 +67,11 @@ img {
 			<!-- 검색창과 글작성 시작-->
 			<div class="d-flex justify-content-end">
 				<form method="POST" action="main">
-					<input class="form-control" type="text" placeholder="Search"
-						aria-label="Search">
 					<input type="hidden" name="action" value="moveReviewRegist">
+					<input type="hidden" name="videoId" value="${videoId}">
 					<input type="hidden" name="videoNo" value="${videoNo}">
-				
-				<button class="btn btn-outline-dark d-inline" type="button">
-					검색</button>
-					
-				<button class="btn btn-outline-info d-inline" type="submit">
-					글작성</button>
+					<button class="btn btn-outline-info d-inline" type="submit">
+						글작성</button>
 				</form>
 			</div>
 			<!-- 검색창과 글작성 끝-->
@@ -109,15 +104,15 @@ img {
 								<tr>
 									<th scope="row"><a
 										style="text-decoration: none; color: black"
-										href="/ssafit/main?action=reviewDetail&no=${item.no}">${item.reviewNo }</a></th>
+										href="/ssafit/main?action=reviewDetail&no=${item.no}&videoId=${videoId}">${item.reviewNo }</a></th>
 									<td><a style="text-decoration: none; color: black"
-										href="/ssafit/main?action=reviewDetail&no=${item.no}">${item.title}</a></td>
+										href="/ssafit/main?action=reviewDetail&no=${item.no}&videoId=${videoId}">${item.title}</a></td>
 									<td><a style="text-decoration: none; color: black"
-										href="/ssafit/main?action=reviewDetail&no=${item.no}">${item.userName }</a></td>
+										href="/ssafit/main?action=reviewDetail&no=${item.no}&videoId=${videoId}">${item.userName }</a></td>
 									<td><a style="text-decoration: none; color: black"
-										href="/ssafit/main?action=reviewDetail&no=${item.no}">${item.viewCnt }</a></td>
+										href="/ssafit/main?action=reviewDetail&no=${item.no}&videoId=${videoId}">${item.viewCnt }</a></td>
 									<td><a style="text-decoration: none; color: black"
-										href="/ssafit/main?action=reviewDetail&no=${item.no}">${item.date}</a></td>
+										href="/ssafit/main?action=reviewDetail&no=${item.no}&videoId=${videoId}">${item.date}</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
