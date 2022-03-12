@@ -48,6 +48,7 @@ body {
 	<main class="flex-shrink-0">
 		<div class="container">
 			<form method="POST" action="main">
+				<input type="hidden" name="videoId" value="${videoId}">
 				<input type="hidden" name="videoNo" value="${review.videoNo}">
 				<input type="hidden" name="action" value="reviewRewrite"> <input
 					type="hidden" name="no" value="${review.no}"> <br>
@@ -70,11 +71,11 @@ body {
 						style="color: white;">수정</button>
 					<!-- 삭제 버튼 -->
 					<input class="btn btn-primary" type="button"
-						onClick="location.href='<c:url value='/main'/>?action=reviewDelete&no=${review.no}&videoNo=${review.videoNo }'"
+						onClick="location.href='<c:url value='/main'/>?action=reviewDelete&no=${review.no}&videoNo=${review.videoNo }&videoId=${videoId}'"
 						value="삭제">
 					<!-- 취소 버튼 -->
 					<a class="btn btn-danger "
-						href="/ssafit/main?action=reviewRewriteCancel&videoNo=${review.videoNo}"
+						href="/ssafit/main?action=reviewRewriteCancel&videoNo=${review.videoNo}&videoId=${videoId}"
 						role="button">취소</a>
 				</div>
 			</form>
