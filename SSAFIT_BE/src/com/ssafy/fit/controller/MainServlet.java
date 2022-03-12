@@ -13,8 +13,10 @@ import javax.servlet.http.HttpSession;
 
 import com.ssafy.fit.model.dao.user.UserDao;
 import com.ssafy.fit.model.dao.video.ReviewDao;
+import com.ssafy.fit.model.dao.video.VideoDao;
 import com.ssafy.fit.model.dto.user.User;
 import com.ssafy.fit.model.dto.video.Review;
+import com.ssafy.fit.model.dto.video.Video;
 
 
 @WebServlet("/main")
@@ -47,6 +49,15 @@ public class MainServlet extends HttpServlet {
 		case "logout":
 			doLogout(req, resp);
 			break;
+		case "videoList":
+			doVideoList(req, resp);
+			break;
+		case "videoPartList":
+			doPartList(req, resp);
+			break;
+		case "moveReviewRegist":
+			doMoveReviewRegist(req, resp);
+			break;
 		case "reviewRegist":
 			doReviewRegist(req, resp);
 			break;
@@ -67,8 +78,7 @@ public class MainServlet extends HttpServlet {
 			break;
 		// 리뷰 수정 페이지에서 취소를 누르면 수정하려던 리뷰가 소속된 비디오의 리뷰리스트로 간다.
 		case "reviewRewriteCancel":
-			int videoNo = Integer.parseInt(req.getParameter("videoNo"));
-			doReviewList(videoNo, req, resp);
+			doReviewList(req, resp);
 			break;
 		case "reviewDelete":
 			doReviewDelete(req, resp);
@@ -132,14 +142,7 @@ public class MainServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			User loginUser = dao.getLoginUser(id, pw);
 			session.setAttribute("loginUser", loginUser);
-
-//			// 쿠키 생성 // name, value
-//			Cookie cookie = new Cookie("userName", loginUser.getName());
-//			
-//			//유효시간 설정(초)
-//			cookie.setMaxAge(60*60*3); //3시간
-//			response.addCookie(cookie);
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			request.getRequestDispatcher("main.jsp").forward(request, response);
 		}
 		
 	}
@@ -149,12 +152,38 @@ public class MainServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		//세션 전부 날리기
 		session.invalidate();
-		response.sendRedirect("index.jsp");
-//		// 쿠키 삭제
-//		Cookie cookie = new Cookie("userName", null);
-//		//유효시간 설정(초)
-//		cookie.setMaxAge(0);
-//		response.addCookie(cookie);
+		response.sendRedirect("main.jsp");
+	}
+	
+	private void doVideoList(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+		//등록 되어 있는 게시글을 전부 읽어와서 그친구를 Home.jsp로 보내주면 좋겠다.
+		VideoDao dao = VideoDao.getInstance();
+		List<Video> list = dao.selectVideo();
+		//Home.jsp 에 실제 내 데이터를 실어서 전달 할래~~~
+		req.setAttribute("list", list);
+		RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
+		rd.forward(req, resp);
+	}
+	
+	private void doPartList(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+		String part = req.getParameter("findpart");
+		VideoDao dao = VideoDao.getInstance();
+		List<Video> partlist = dao.findVideo(part);
+		List<Video> list = dao.selectVideo();
+		//Home.jsp 에 실제 내 데이터를 실어서 전달 할래~~~
+		req.setAttribute("list", list);
+		System.out.println(part);
+		req.setAttribute("partlist", partlist);
+		RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
+		rd.forward(req, resp);
+		
+	}
+	
+	private void doMoveReviewRegist(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+		int videoNo = Integer.parseInt(req.getParameter("videoNo"));
+		req.setAttribute("videoNo", videoNo);
+		RequestDispatcher rd = req.getRequestDispatcher("/video/reviewRegist.jsp");
+		rd.forward(req, resp);
 	}
 	
 	// 리뷰 등록
@@ -162,33 +191,27 @@ public class MainServlet extends HttpServlet {
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		String userName = req.getParameter("userName");
+		String videoId = req.getParameter("videoId");
+		req.setAttribute("videoId", videoId);
 		int videoNo = Integer.parseInt(req.getParameter("videoNo"));
-		
+		req.setAttribute("videoNo", videoNo);
 		// List에 추가
 		Review review = new Review(videoNo, title, content, userName);
 		ReviewDao.getInstance().addReview(review);
 		// 리뷰 등록 시 해당 영상 리뷰 목록 업데이트 후 이동	
-		doReviewList(videoNo, req, resp);
+		doReviewList(req, resp);
 
 	}
 	
 	// 해당 영상 리뷰
-	private void doReviewList(int videoNo, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void doReviewList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String videoId = request.getParameter("videoId");
+		int videoNo = Integer.parseInt(request.getParameter("videoNo"));
 		ReviewDao dao = ReviewDao.getInstance();
 		List<Review> list = dao.getVideoReviewList(videoNo);
 		request.setAttribute("list", list);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/video/reviewList.jsp");
-		rd.forward(request, response);
-	}
-	
-	// 작성된 모든 리뷰
-	private void doReviewList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		ReviewDao dao = ReviewDao.getInstance();
-		List<Review> list = dao.getReviewList();
-		request.setAttribute("list", list);
-		
+		request.setAttribute("videoId", videoId);
+		request.setAttribute("videoNo", videoNo);
 		RequestDispatcher rd = request.getRequestDispatcher("/video/reviewList.jsp");
 		rd.forward(request, response);
 	}
@@ -221,13 +244,18 @@ public class MainServlet extends HttpServlet {
 			throws IOException, ServletException {
 		// 클릭한 리뷰의 고유번호를 받는다.
 		int no = Integer.parseInt(req.getParameter("no"));
+		int idx = ReviewDao.getInstance().getIdx(no);
 		// 클릭한 리뷰가 리스트 전체에서 몇번째인지를 통해 해당 리뷰 객체를 얻는다.
-		Review toReWrite = ReviewDao.getInstance().getReviewList().get(ReviewDao.getInstance().getIdx(no));
+		Review toReWrite = ReviewDao.getInstance().getReviewList().get(idx);
+		// 클릭한 리뷰가 무슨 비디오 소속인지
+		int videoNo = Integer.parseInt(req.getParameter("videoNo"));
+		System.out.println("출력됨 !!!! "+videoNo);
+		req.setAttribute("videoNo", videoNo);
 		// 해당 객체의 제목과 내용을 수정한다.
 		toReWrite.setTitle(req.getParameter("title"));
 		toReWrite.setContent(req.getParameter("content"));
 
-		doReviewList(toReWrite.getVideoNo(), req, resp);
+		doReviewList(req, resp);
 	}
 
 	private void doReviewDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -238,11 +266,12 @@ public class MainServlet extends HttpServlet {
 		// 클릭한 리뷰의 객체 받기
 		Review toReWrite = ReviewDao.getInstance().getReviewList().get(idx);
 		// 클릭한 리뷰가 무슨 비디오 소속인지
-		int videoNo = toReWrite.getVideoNo();
+		int videoNo = Integer.parseInt(req.getParameter("videoNo"));
 		// 클릭한 리뷰가 동일 비디오 리뷰 중 몇번째 리뷰인지
 		int reviewNo = toReWrite.getReviewNo();
 		// 클릭한 리뷰 제거
 		ReviewDao.getInstance().getReviewList().remove(idx);
+		req.setAttribute("videoNo", videoNo);
 		// ReviewNo 재배열
 		// 클릭한 리뷰와 같은 비디오 소속인 리뷰들 중 클릭한 리뷰 이후의 리뷰들의 ReviewNo을 하나 줄인다.
 		for(int i=reviewNo; i <= ReviewDao.getInstance().getVideoReviewList(videoNo).size();i++) {
@@ -250,6 +279,6 @@ public class MainServlet extends HttpServlet {
 			int oldRN = ReviewDao.getInstance().getVideoReviewList(videoNo).get(i-1).getReviewNo();
 			ReviewDao.getInstance().getVideoReviewList(videoNo).get(i-1).setReviewNo(oldRN-1);
 		}
-		doReviewList(toReWrite.getVideoNo(), req, resp);
+		doReviewList(req, resp);
 	}
 }
