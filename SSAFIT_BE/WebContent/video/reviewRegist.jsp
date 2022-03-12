@@ -48,12 +48,7 @@
 				<hr>
 
 				<!-- 입력 창 -->
-<!-- 				<div class="mb-3">
-					<label for="exampleFormControlInput2" class="form-label">영상번호</label>
-					<input type="number" class="form-control"
-						id="FormControlInput2 videoNo" name="videoNo"
-						placeholder="영상번호를 입력하세요">
-				</div> -->
+				<input type="hidden" name="videoId" value="${videoId }">
 				<input type="hidden" name="videoNo" value="${videoNo }">
 				<div class="mb-3">
 					<label for="exampleFormControlInput1" class="form-label">제목</label>
@@ -68,8 +63,9 @@
 				</div>
 				<div class="mb-3 text-center">
 					<!-- 입력 버튼 -->
-					<input class="btn btn-primary" type="submit" value="등록"> <input
-						class="btn btn-danger" type="reset" value="취소">
+					<input class="btn btn-primary" type="submit" value="등록"> <a
+						class="btn btn-danger" href="/ssafit/main?action=reviewRewriteCancel&videoNo=${videoNo}&videoId=${videoId}"
+						role="button">취소</a>
 				</div>
 			</div>
 		</form>
