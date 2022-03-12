@@ -9,8 +9,8 @@ public class VideoDao {
 	private List<Video> list = new ArrayList<>();
 	private int no = 0;
 	private static VideoDao instance;
-	private List<Video> partlist = new ArrayList<>();
-	private List<Video> viewlist = new ArrayList<>();
+	private List<Video> partlist;
+	private List<Video> viewlist;
 //	싱글턴 만들장~~!! 오또케??
 	private VideoDao() {
 		insertVideo(new Video("gMaB-fG4u4g", "전신 다이어트 최고의 운동 [칼소폭 찐 핵핵매운맛]", "전신", 10, "ThankyouBUBU", "https://www.youtube.com/embed/gMaB-fG4u4g"));
@@ -33,6 +33,8 @@ public class VideoDao {
 	// 전체 보드 가져오기
 	public List<Video> selectVideo() {
 		//조회수대로 정렬//
+		viewlist = new ArrayList<>();
+		
 		for(int i = 0; i < list.size(); i++) {
 			if(list.get(i).getViewCnt() > 20) {
 				viewlist.add(list.get(i));
@@ -49,6 +51,8 @@ public class VideoDao {
 	
 	public List<Video> findVideo(String part) {
 		//파라미터가 널이 아니면 여기로 들어와//널이면 list를 반환하는거로 작성하기.
+		partlist = new ArrayList<>();
+		
 		for(int i = 0; i < list.size(); i++) {
 			if(list.get(i).getPart().equals(part)) {
 				partlist.add(list.get(i));
