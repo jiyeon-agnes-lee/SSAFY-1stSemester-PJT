@@ -87,14 +87,14 @@ body {
 			</div>
 			<!-- 목록 버튼 -->
 			<a class="btn btn-primary float-end"
-				href="/ssafit/main?action=reviewRewriteCancel&videoNo=${review.videoNo}"
+				href="/ssafit/main?action=reviewRewriteCancel&videoNo=${review.videoNo}&videoId=${videoId}"
 				role="button">목록</a>
 			<!-- 리뷰 수정(로그인이 되어 있고 로그인 유저 네임과 현재 리뷰 유저 네임이 같을 경우만 리뷰 수정 버튼 표시 -->
 			<c:if test="${!empty loginUser.name}">
 				<c:if test="${review.userName eq loginUser.name}">
 					<a class="btn btn-info float-end"
 						style="margin-right: 5px; color: white;"
-						href="/ssafit/main?action=reviewModify&no=${review.no}"
+						href="/ssafit/main?action=reviewModify&no=${review.no}&videoId=${videoId}"
 						role="button">리뷰 수정</a>
 				</c:if>
 			</c:if>
