@@ -47,6 +47,17 @@ public class ReviewDao {
 		review.setDate(LocalDate.now());
 		list.add(review);
 	}
-
+	
+	// 리뷰의 고유번호를 사용해서 해당 리뷰가 전체리스트의 몇 index에 있는가를 찾아낸다.
+	public int getIdx(int no) {
+		for(int i=0; i< list.size(); i++) {
+			Review r = list.get(i);
+			if(r.getNo() == no) {
+				return i;
+			}
+			
+		}
+		return -1;
+	}
 }
 
