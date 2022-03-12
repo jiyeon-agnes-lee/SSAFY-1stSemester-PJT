@@ -146,26 +146,29 @@
 							<!--<c:if test="${video.viewCnt gt 0}">-->
 							<c:if test="${status.index == 0}">
 								<div class="carousel-item active">
-									<div class="card shadow-sm m-2" style="width: 18rem;">
-										<iframe width="100%"
-											src="https://www.youtube.com/embed/${video.id}"
-											title="YouTube video player" frameborder="0"
-											allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-											allowfullscreen> </iframe>
-										<div class="card-body">
+									<div class="container-1"
+										style="display: flex; justify-content: center; align-items: center;">
+										<div class="card shadow-sm m-2" style="width: 18rem;">
+											<iframe width="100%"
+												src="https://www.youtube.com/embed/${video.id}"
+												title="YouTube video player" frameborder="0"
+												allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+												allowfullscreen> </iframe>
+											<div class="card-body">
 
-											<p class="card-text" style="height: 55px">${video.title}</p>
+												<p class="card-text" style="height: 55px">${video.title}</p>
 
-											<div
-												class="d-flex justify-content-between align-items-center">
-												<button type="button"
-													class="btn btn-sm btn-outline-secondary">리뷰</button>
-												<div class="d-flex flex-row">
-													<span class="view"><i class="bi bi-eye"></i>${video.viewCnt}</span>
-													<span class="badge bg-success">${video.part}</span> <span
-														class="badge bg-danger ">${video.channelName}</span>
+												<div
+													class="d-flex justify-content-between align-items-center">
+													<button type="button"
+														class="btn btn-sm btn-outline-secondary">리뷰</button>
+													<div class="d-flex flex-row">
+														<span class="view"><i class="bi bi-eye"></i>${video.viewCnt}</span>
+														<span class="badge bg-success">${video.part}</span> <span
+															class="badge bg-danger ">${video.channelName}</span>
+													</div>
+
 												</div>
-
 											</div>
 										</div>
 									</div>
@@ -173,26 +176,29 @@
 							</c:if>
 							<c:if test="${status.index > 0}">
 								<div class="carousel-item">
-									<div class="card shadow-sm m-2" style="width: 18rem;">
-										<iframe width="100%"
-											src="https://www.youtube.com/embed/${video.id}"
-											title="YouTube video player" frameborder="0"
-											allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-											allowfullscreen> </iframe>
-										<div class="card-body">
+									<div class="container-1"
+										style="display: flex; justify-content: center; align-items: center;">
+										<div class="card shadow-sm m-2" style="width: 18rem;">
+											<iframe width="100%"
+												src="https://www.youtube.com/embed/${video.id}"
+												title="YouTube video player" frameborder="0"
+												allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+												allowfullscreen> </iframe>
+											<div class="card-body">
 
-											<p class="card-text" style="height: 55px">${video.title}</p>
+												<p class="card-text" style="height: 55px">${video.title}</p>
 
-											<div
-												class="d-flex justify-content-between align-items-center">
-												<button type="button"
-													class="btn btn-sm btn-outline-secondary">리뷰</button>
-												<div class="d-flex flex-row">
-													<span class="view"><i class="bi bi-eye"></i>${video.viewCnt}</span>
-													<span class="badge bg-success">${video.part}</span> <span
-														class="badge bg-danger ">${video.channelName}</span>
+												<div
+													class="d-flex justify-content-between align-items-center">
+													<button type="button"
+														class="btn btn-sm btn-outline-secondary">리뷰</button>
+													<div class="d-flex flex-row">
+														<span class="view"><i class="bi bi-eye"></i>${video.viewCnt}</span>
+														<span class="badge bg-success">${video.part}</span> <span
+															class="badge bg-danger ">${video.channelName}</span>
+													</div>
+
 												</div>
-
 											</div>
 										</div>
 									</div>
@@ -222,20 +228,26 @@
 		<!-- 최근에 가장 많이 본 동영상 끝-->
 		<!--운동 부위 선택 시작-->
 		<div class="container">
-			<h2 class="d-inline display-7 fw-bold">부위별 운동</h2>
-			<form method="POST" action="/main">
-				<input type="hidden" name="action" value="partList"> <input
-					type="button" class="btn btn-outline-info btn-sm" id=""
-					name="findpart" value="가슴"> <input type="button"
-					class="btn btn-outline-info btn-sm" id="" name="findpart"
-					value="어깨"> <input type="button"
-					class="btn btn-outline-info btn-sm" id="" name="findpart" value="등">
-				<input type="button" class="btn btn-outline-info btn-sm" id=""
-					name="findpart" value="하체"> <input type="button"
-					class="btn btn-outline-info btn-sm" id="" name="findpart"
-					value="전신">
-			</form>
+			<div class="d-flex flex-row">
+				<div class="item">
+					<h2 class="d-inline display-7 fw-bold">부위별 운동</h2>
+				</div>
+				<div class="item" style="margin-left: 10px; margin-top:6px;">
+					<form method="POST" action="/ssafit/main">
+						<input type="hidden" name="action" value="partList"> <input
+							type="submit" class="btn btn-outline-info btn-sm" id=""
+							name="findpart" value="상체"> <input type="submit"
+							class="btn btn-outline-info btn-sm" id="" name="findpart"
+							value="복부"> <input type="submit"
+							class="btn btn-outline-info btn-sm" id="" name="findpart"
+							value="하체"> <input type="submit"
+							class="btn btn-outline-info btn-sm" id="" name="findpart"
+							value="전신">
+					</form>
+				</div>
+			</div>
 			<hr>
+
 
 			<!-- 앨범 시작-->
 			<div class="album py-5 bg-light">
@@ -246,7 +258,8 @@
 							<!-- 첫번째 앨범 시작 -->
 							<c:if test="${status.index == 0}">
 								<div class="carousel-item active">
-									<div id="video-area2" class="d-flex flex-wrap">
+									<div class="container-1"
+										style="display: flex; justify-content: center; align-items: center;">
 										<div class="card shadow-sm m-2" style="width: 18rem;">
 											<iframe width="100%"
 												src="https://www.youtube.com/embed/${partvideo.id}"
@@ -261,7 +274,7 @@
 													<button type="button"
 														class="btn btn-sm btn-outline-secondary">리뷰</button>
 													<div class="d-flex flex-row">
-														<span class="view"><i class="bi bi-eye"></i>${video.viewCnt}</span>
+														<span class="view"><i class="bi bi-eye"></i>${partvideo.viewCnt}</span>
 														<span class="badge bg-success">${partvideo.part}</span> <span
 															class="badge bg-danger ">${partvideo.channelName}</span>
 													</div>
@@ -269,8 +282,6 @@
 
 											</div>
 										</div>
-
-
 									</div>
 								</div>
 							</c:if>
@@ -279,24 +290,25 @@
 							<!-- 두번째 앨범 시작 -->
 							<c:if test="${status.index > 0}">
 								<div class="carousel-item">
-									<div id="video-area2" class="d-flex flex-wrap">
+									<div class="container-1"
+										style="display: flex; justify-content: center; align-items: center;">
 										<div class="card shadow-sm m-2" style="width: 18rem;">
 											<iframe width="100%"
-												src="https://www.youtube.com/embed/${video.id}"
+												src="https://www.youtube.com/embed/${partvideo.id}"
 												title="YouTube video player" frameborder="0"
 												allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 												allowfullscreen></iframe>
 											<div class="card-body">
 
-												<p class="card-text" style="height: 55px">${video.title}</p>
+												<p class="card-text" style="height: 55px">${partvideo.title}</p>
 												<div
 													class="d-flex justify-content-between align-items-center">
 													<button type="button"
 														class="btn btn-sm btn-outline-secondary">리뷰</button>
 													<div class="d-flex flex-row">
-														<span class="view"><i class="bi bi-eye"></i>${video.viewCnt}</span>
-														<span class="badge bg-success">${video.part}</span> <span
-															class="badge bg-danger ">${video.channelName}</span>
+														<span class="view"><i class="bi bi-eye"></i>${partvideo.viewCnt}</span>
+														<span class="badge bg-success">${partvideo.part}</span> <span
+															class="badge bg-danger ">${partvideo.channelName}</span>
 													</div>
 												</div>
 
