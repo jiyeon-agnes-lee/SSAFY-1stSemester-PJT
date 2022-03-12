@@ -57,7 +57,7 @@ img {
 			<!-- 썸네일 시작-->
 			<!-- 비디오 정보 가져오기 구현 필요-->
 			<div class="m-auto" style="width: 300px;">
-				<iframe src="https://www.youtube.com/embed/gMaB-fG4u4g"
+				<iframe src="https://www.youtube.com/embed/${videoId}"
 					title="YouTube video player"></iframe>
 			</div>
 
@@ -66,15 +66,18 @@ img {
 
 			<!-- 검색창과 글작성 시작-->
 			<div class="d-flex justify-content-end">
-				<form>
+				<form method="POST" action="main">
 					<input class="form-control" type="text" placeholder="Search"
 						aria-label="Search">
-				</form>
+					<input type="hidden" name="action" value="moveReviewRegist">
+					<input type="hidden" name="videoNo" value="${videoNo}">
+				
 				<button class="btn btn-outline-dark d-inline" type="button">
 					검색</button>
-				<button class="btn btn-outline-info d-inline" type="button"
-					onClick="location.href='http://localhost:8080/ssafit/video/reviewRegist.jsp'">
+					
+				<button class="btn btn-outline-info d-inline" type="submit">
 					글작성</button>
+				</form>
 			</div>
 			<!-- 검색창과 글작성 끝-->
 			<br>
