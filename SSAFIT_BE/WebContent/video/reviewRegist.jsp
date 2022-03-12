@@ -48,13 +48,13 @@
 				<hr>
 
 				<!-- 입력 창 -->
-				<div class="mb-3">
+<!-- 				<div class="mb-3">
 					<label for="exampleFormControlInput2" class="form-label">영상번호</label>
 					<input type="number" class="form-control"
 						id="FormControlInput2 videoNo" name="videoNo"
 						placeholder="영상번호를 입력하세요">
-				</div>
-
+				</div> -->
+				<input type="hidden" name="videoNo" value="${videoNo }">
 				<div class="mb-3">
 					<label for="exampleFormControlInput1" class="form-label">제목</label>
 					<input type="text" class="form-control" id="FormControlInput1"
