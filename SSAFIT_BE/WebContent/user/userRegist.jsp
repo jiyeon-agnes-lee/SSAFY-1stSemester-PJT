@@ -72,9 +72,12 @@
 					<input type="number" class="form-control"
 						id="FormControlInput5 age" name="age" placeholder="나이를 입력하세요">
 				</div>
-				<!-- 입력 버튼 -->
-				<input class="btn btn-primary w-25 m-auto" type="submit" value="가입"> 
-				<input class="btn btn-danger w-25 m-auto" type="reset" value="취소">
+				<div class="mb-3 text-center">
+					<!-- 입력 버튼 -->
+					<input class="btn btn-primary w-25 m-auto btn-lg" type="submit"
+						value="가입"> 
+					<input class="btn btn-danger  w-25 m-auto btn-lg" type="reset" value="취소">
+				</div>
 			</div>
 		</form>
 	</main>
